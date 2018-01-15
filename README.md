@@ -1,2 +1,13 @@
 # BrainChild
-Joint work with yellingintothefan, using TensorFlow for ML.
+
+First install tensor flow (make sure you are root first).
+
+    sh install_tensorflow.sh
+
+Then compile:
+
+    make
+
+And run:
+
+    ./bc
