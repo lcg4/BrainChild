@@ -2,4 +2,4 @@
 
 Watch it train:
 
-    python main.py
+    python tsc_main.py
