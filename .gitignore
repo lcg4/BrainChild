@@ -1,3 +1,1 @@
-*.o
-*.d
-bc
+__pycache__
