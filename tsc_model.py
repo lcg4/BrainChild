@@ -20,9 +20,6 @@ os.environ['TF_CPP_MIN_LOG_LEVEL']='3'
 import tensorflow as tf
 tf.logging.set_verbosity(tf.logging.ERROR)
 
-for p in dir(tf.contrib.rnn):
-    print(p)
-
 from tensorflow.python.framework import ops
 from tensorflow.python.ops import clip_ops
 from tensorflow.contrib.rnn import LSTMCell

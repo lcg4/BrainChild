@@ -15,10 +15,11 @@ from tsc_model import Model,sample_batch,load_data
 #Set these directories
 direc = 'UCR_TS_Archive_2015'
 summaries_dir = 'log_tb'
+dataset = 'ChlorineConcentration'
 
 """Load the data"""
 ratio = np.array([0.8,0.9]) #Ratios where to split the training and validation set
-X_train,X_val,X_test,y_train,y_val,y_test = load_data(direc,ratio,dataset='ChlorineConcentration')
+X_train,X_val,X_test,y_train,y_val,y_test = load_data(direc,ratio,dataset=dataset)
 N,sl = X_train.shape
 num_classes = len(np.unique(y_train))
 
