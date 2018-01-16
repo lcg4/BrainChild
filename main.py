@@ -1,8 +1,11 @@
 # Solves XOR
-# Gets cost REALLY low to like 1e-12
+# Gets loss REALLY low to like 1e-12
 
 import tensorflow as tf
 import time
+
+XORX = [ [0, 0], [0, 1], [1, 0], [1, 1] ]
+XORY = [ [0], [1], [1], [0] ]
 
 x = tf.placeholder(tf.float32, shape = [4, 2], name = "x-input")
 y = tf.placeholder(tf.float32, shape = [4, 1], name = "y-input")
@@ -14,24 +17,25 @@ bias1 = tf.Variable(tf.zeros([2]), name = "Bias1")
 bias2 = tf.Variable(tf.zeros([1]), name = "Bias2")
 
 A2 = tf.sigmoid(tf.matmul(x, th1) + bias1)
+
 hypothesis = tf.sigmoid(tf.matmul(A2, th2) + bias2)
 
-cost = tf.square(y - hypothesis)
+cross_entropy = tf.square(y - hypothesis)
 
-step = tf.train.AdamOptimizer(0.01).minimize(cost)
+loss = tf.reduce_mean(cross_entropy)
 
-XORX = [ [0, 0], [0, 1], [1, 0], [1, 1] ]
-XORY = [ [0], [1], [1], [0] ]
+optimizer = tf.train.AdamOptimizer(0.01)
+
+step = optimizer.minimize(loss)
 
 init = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(init)
 
-feed_dict = { x : XORX, y : XORY }
-
 # TRAIN BABY TRAIN
 t0 = time.time()
 for i in range(100000):
+    feed_dict = { x : XORX, y : XORY }
     sess.run(step, feed_dict = feed_dict)
     if(i % 1000 == 0):
         print('Hypothesis ',
@@ -44,8 +48,8 @@ for i in range(100000):
             sess.run(th2))
         print('Bias2 ',
             sess.run(bias2))
-        print('cost ',
-            sess.run(cost, feed_dict = feed_dict))
+        print('loss',
+            sess.run(loss, feed_dict = feed_dict))
 t1 = time.time()
 
 print(t1 - t0)
