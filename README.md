@@ -1,5 +1,3 @@
 # BrainChild
 
-Watch it train:
-
-    python tsc_main.py
+Machine learning stocks. A work in progress, of course.
